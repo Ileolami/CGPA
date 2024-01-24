@@ -78,7 +78,7 @@ const Details = () => {
     });
   };
   return (
-    <main className=' flex items-center justify-center my-14'>
+    <main className=' flex items-center justify-center mx-14'>
     <div >
       <form>
         <div className='flex text-white mx-20 my-5 gap-5 lg:gap-20 lg:text-black' >
