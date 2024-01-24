@@ -1,5 +1,4 @@
-import React, { useState, createContext } from 'react';
-
+import { useState, createContext } from 'react';
 export const CgpaContext = createContext();
 
 export const CgpaProvider = ({ children }) => {
@@ -8,7 +7,7 @@ export const CgpaProvider = ({ children }) => {
     credit: '',
     grade: '',
   });
-  const [submittedValues, setSubmittedValues] = useState(null);
+  const [submittedValues, setSubmittedValues] = useState([]);
 
   return (
     <CgpaContext.Provider value={{ formValues, setFormValues, submittedValues, setSubmittedValues }}>

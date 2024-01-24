@@ -1,20 +1,24 @@
-import React, { useContext } from 'react';
 import CgpaContext from '../contexts/CgpaContext';
-
+import { useContext } from 'react';
 const Details = () => {
   const { formValues, setFormValues, setSubmittedValues } = useContext(CgpaContext);
+  const gradeMapping = {
+      "A": 5,
+      "B": 4,
+      "C": 3,
+      "D": 2,
+      "E": 1,
+      "F": 0,
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmittedValues({ ...formValues, grade: gradeMapping[formValues.grade.toUpperCase()] });
+    const updatedFormValues = { ...formValues, 
+        grade: gradeMapping[formValues.grade.toUpperCase()],
+        gradeCreditProduct: gradeMapping[formValues.grade.toUpperCase()] * formValues.credit
+    };
+    setSubmittedValues(prevValues => [...prevValues, updatedFormValues]);
+    setFormValues({ title: '', credit: '', grade: '' }); 
   };
-    const gradeMapping = {
-        "A": 5,
-        "B": 4,
-        "C": 3,
-        "D": 2,
-        "E": 1,
-        "F": 0,
-    }
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -26,7 +30,7 @@ const Details = () => {
             placeholder="CHM 111"
             value={formValues.title}
             onChange={(e) =>
-              setFormValues({ ...formValues, title: e.target.value })
+              setFormValues({ ...formValues, title: e.target.value.toLocaleUpperCase() })
             }
           />
         </div>
