@@ -6,6 +6,7 @@ export const CgpaProvider = ({ children }) => {
     title: '',
     credit: '',
     grade: '',
+    gradePoint: '',
   });
   const [submittedValues, setSubmittedValues] = useState([]);
 

@@ -4,7 +4,7 @@ import Display from'./Display';
 const Home = ()=> {
   
     return (
-        <CgpaProvider>
+    <CgpaProvider>
       <Input />
       <Display />
     </CgpaProvider>

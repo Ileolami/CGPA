@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans&family=Playfair+Display&display=swap');
+
+body{
+    background: url('/public/Pexels\ Photo\ by\ Pixabay.png');
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 20px;
+    line-height: 19px;
+    font-weight: 500;
+}
+label{
+    font-weight: 600;
+}
+input:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+table {
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.425);
+}
+tr:nth-child(even) {
+    background-color: #ddd;
+  }
+  tr:nth-child(odd) {
+      background-color: white;
+    }
+    
+  

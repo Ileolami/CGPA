@@ -4,33 +4,33 @@ const Display = () => {
   const { submittedValues } = useContext(CgpaContext);
 
   return (
-    <div>
-      {submittedValues && (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Course Title</th>
-                <th>Course Unit</th>
-                <th>Grade</th>
-                <th>GC</th>
+    <div className='flex item-center justify-center '>
+    {submittedValues && (
+      <>
+        <table style={{ width: '60%', borderCollapse: 'collapse', borderRadius:'10px'}}>
+          <thead>
+            <tr style={{ backgroundColor: '#ddd' }}>
+              <th style={{  padding: '8px',textAlign:'center' }}>Title</th>
+              <th style={{  padding: '8px', textAlign:'center' }}>Unit</th>
+              <th style={{  padding: '8px', textAlign:'center' }}>Grade</th>
+              <th style={{  padding: '8px', textAlign:'center' }}>Point</th>
+              <th style={{  padding: '8px', textAlign:'center' }}>GC</th>
+            </tr>
+          </thead>
+          <tbody>
+            {submittedValues.map((value, index) => (
+              <tr key={index} >
+                <td style={{  padding: '8px',textAlign:'center' }}>{value.title}</td>
+                <td style={{  padding: '8px', textAlign:'center' }}>{value.credit}</td>
+                <td style={{  padding: '8px', textAlign:'center' }}>{value.grade}</td>
+                <td style={{  padding: '8px',  textAlign:'center'}}>{value.gradePoint}</td>
+                <td style={{  padding: '8px', textAlign:'center' }}>{value.gradeCreditProduct}</td>
               </tr>
-            </thead>
-            <tbody>
-               {submittedValues.map((value, index) => (
-                <tr key={index}>
-                 <td>{value.title}</td>
-                 <td>{value.credit}</td>
-                 <td>{value.grade}</td>
-                 <td>{value.gradeCreditProduct}</td>
-                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
+            ))}
+          </tbody>
+        </table>
+      </>
+    )}
     </div>
-  );
-};
-
+); }
 export default Display;
