@@ -9,11 +9,13 @@ export const CgpaProvider = ({ children }) => {
     gradePoint: '',
   });
   const [submittedValues, setSubmittedValues] = useState([]);
+  const [calculatedCgpa, setCalculatedCgpa] = useState(null);
 
   return (
-    <CgpaContext.Provider value={{ formValues, setFormValues, submittedValues, setSubmittedValues }}>
+    <CgpaContext.Provider value={{ formValues, setFormValues, submittedValues, setSubmittedValues, calculatedCgpa, setCalculatedCgpa }}>
       {children}
     </CgpaContext.Provider>
   );
 };
+
 export default CgpaContext;
