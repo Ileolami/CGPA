@@ -35,7 +35,7 @@ const Display = () => {
               </tr>
             ))}
             <tr>
-                <td colSpan="5" style={{ padding: '5px', textAlign: 'center' }}>
+                <td colSpan="5" style={{ padding: '5px', textAlign: 'center', color:"greenyellow" }}>
                   {calculatedCgpa && `Your CGPA is: ${calculatedCgpa.toFixed(2)}`}
                 </td>
               </tr>
