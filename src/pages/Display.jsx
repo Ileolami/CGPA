@@ -41,6 +41,7 @@ const Display = () => {
           {submittedValues.map((value, index) => {
         const gradeMapping = scale === '4.0' ? gradeMapping4 : gradeMapping5;
         const gradePoint = gradeMapping[value.grade];
+        const gradeCreditProduct = gradePoint * parseFloat(value.credit);
 
               return (
                 <tr key={index}>
@@ -48,7 +49,7 @@ const Display = () => {
                   <td style={{ padding: '5px', textAlign: 'center' }}>{value.credit}</td>
                   <td style={{ padding: '5px', textAlign: 'center' }}>{value.grade}</td>
                   <td style={{ padding: '5px', textAlign: 'center' }}>{gradePoint}</td>
-                  <td style={{ padding: '5px', textAlign: 'center' }}>{value.gradeCreditProduct}</td>
+                  <td style={{ padding: '5px', textAlign: 'center' }}>{gradeCreditProduct}</td>
                   <td style={{ padding: '5px', textAlign: 'center' }}>
                     <DeleteButton index={index} onDelete={handleDelete}/>
                   </td>
