@@ -96,11 +96,13 @@ const Display = () => {
         {gradePoint}
       </td>
       <td style={{padding: '2px', textAlign: 'center'}}>{gradeCreditProduct}</td>
-                  <td style={{ padding: '5px', textAlign: 'center', display:'flex', gap:' 4px' }}>
-                    <DeleteButton index={index} onDelete={handleDelete}/>
-                    <EditButton index={index} onEdit={handleEdit}/>
+                  <td style={{ padding: '2px', textAlign: 'center'}}>
+                    <DeleteButton index={index} onDelete={handleDelete}/></td>
+                    <td style={{ padding: '2px', textAlign: 'center'}}> 
+                    <EditButton index={index} onEdit={handleEdit}/></td>
+                    <td style={{ padding: '2px', textAlign: 'center'}}>
                     <SaveButton/>
-                  </td>
+                    </td>
                 </tr>
               );
             })}
