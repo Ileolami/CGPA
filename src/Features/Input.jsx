@@ -1,7 +1,8 @@
 import CgpaContext from '../contexts/CgpaContext';
 import { useContext } from 'react';
 import AddButton from './AddButton'
-import CalculateCGPA from './CalculateCGPA';
+import CalculateCGPA from './Five';
+import CalculateCGPA2 from './Four';
 
 const Details = () => {
   const { formValues, setFormValues } = useContext(CgpaContext);
@@ -48,8 +49,9 @@ const Details = () => {
           />
         </div>
       </form>
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center gap-4'>
             <AddButton/>  
+            <CalculateCGPA2/>
             <CalculateCGPA/>
         </div>
     </div>

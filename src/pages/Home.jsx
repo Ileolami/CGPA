@@ -4,8 +4,10 @@ import Display from'./Display';
 const Home = ()=> {
     return (
     <CgpaProvider>
-      <Input />
+     <div >
+     <Input />
       <Display />
+     </div>
     </CgpaProvider>
     )
 };

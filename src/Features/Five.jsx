@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Button from "../component/Button";
 import CgpaContext from '../contexts/CgpaContext';
 
 const CalculateCGPA = () => {
-    const { submittedValues, setCalculatedCgpa } = useContext(CgpaContext);
+    const { submittedValues, setCalculatedCgpa,setScale } = useContext(CgpaContext);
   
     const handleCalculate = () => {
       let totalCreditHours = 0;
@@ -13,20 +13,18 @@ const CalculateCGPA = () => {
         totalCreditHours += parseFloat(value.credit);
         totalGradePoints += parseFloat(value.gradeCreditProduct) ;
       });
-  
-      if (totalCreditHours !== 0) {
-        setCalculatedCgpa(totalGradePoints / totalCreditHours);
-      } else {
-        console.log('Total credit hours is zero');
-      }
+      setCalculatedCgpa(totalGradePoints / totalCreditHours);
     };
   
     return (
       <div>
         <Button
-          props='Calculate'
-          onClick={handleCalculate}
-          className=" text-2xl px-1 py-1 w-30 h-12 bg-green-500 text-white rounded-lg border-none font-medium hover:bg-black hover:text-white"
+          props='5.0'
+          onClick={ () =>{
+              setScale('5.0');
+              handleCalculate();
+          }}
+          className=" text-2xl px-5 w-30 h-12 bg-green-500 text-white rounded-lg border-none font-medium hover:bg-black hover:text-white"
         />
       </div>
     );
