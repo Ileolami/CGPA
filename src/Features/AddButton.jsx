@@ -14,7 +14,7 @@ const AddButton =() => {
           F: 0,
         }
         const handleSubmit = (event) => {
-          console.log('button clicked');
+       
           // Prevent the default form submission behavior
           event.preventDefault();
         
@@ -67,18 +67,6 @@ const AddButton =() => {
         
           // Reset the form values
           setFormValues({ title: '', credit: '', grade: '', gradePoint: '' }); 
-        
-          // Show a success toast
-          toast.success('Form submitted successfully', {
-            icon: '👌',
-            style: {
-              border: 'none',
-              padding: '5px',
-              color: '#FFDD00 ',
-              backgroundColor: '#713200',
-            },
-          });
-          
         };
         return (
            <Button props='Add' 
