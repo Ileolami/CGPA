@@ -19,7 +19,7 @@ const CalculateCGPA = () => {
     return (
       <div>
         <Button
-          props='5.0'
+          props='CGPA 5.0'
           onClick={ () =>{
               setScale('5.0');
               handleCalculate();
