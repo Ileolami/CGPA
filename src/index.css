@@ -1,11 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import url('https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans&family=Playfair+Display&display=swap'); */
+ @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap'); 
 
 body{
     background: url('/public/PexelsPhotobyPixabay.png');
-    /* font-family: 'Noto Sans', sans-serif; */
+    font-family: 'Roboto Mono', sans-serif;
     font-size: 20px;
     line-height: 19px;
     font-weight: 500;
