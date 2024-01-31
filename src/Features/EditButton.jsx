@@ -17,7 +17,7 @@ const EditButton = ({ index, onEdit }) => {
       props="Edit"
       icon={<FaPencil className="mx-2"/>}
       onClick={() => handleEdit(index)}
-      className="text-xs px-2 py-2 w-20 h-5 bg-yellow-500 text-white rounded-sm border-none font-medium hover:bg-black hover:text-white"
+      className="text-xs px-2 py-2 w-20 h-5 bg-white text-black rounded-sm border-none font-medium hover:bg-yellow-400 hover:text-white"
     >
       Edit
     </Button>
