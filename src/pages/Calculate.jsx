@@ -1,15 +1,13 @@
 import Input from '../Features/Input';
-import { CgpaProvider } from '../contexts/CgpaContext';
+
 import Display from'./Display';
-const Home = ()=> {
+const Calculate = ()=> {
     return (
-    <CgpaProvider>
      <div>
      <Input />
       <Display />
      </div>
-    </CgpaProvider>
     )
 };
 
-    export default Home;
+    export default Calculate;
