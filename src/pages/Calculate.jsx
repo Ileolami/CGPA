@@ -3,7 +3,7 @@ import Input from '../Features/Input';
 import Display from'../Features/Display';
 const Calculate = ()=> {
     return (
-     <div>
+     <div className='bckg'>
      <Input />
       <Display />
      </div>

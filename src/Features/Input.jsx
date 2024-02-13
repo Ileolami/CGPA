@@ -3,6 +3,7 @@ import { useContext } from "react";
 import AddButton from "./AddButton";
 import CalculateCGPA from "./Five";
 import CalculateCGPA2 from "./Four";
+import Logo from "../assets/CGPA Logo.png"
 
 const Details = () => {
   const { formValues, setFormValues } = useContext(CgpaContext);
@@ -12,7 +13,7 @@ const Details = () => {
       <div className>
         <div className="flex justify-center mb-5  ">
           <img
-            src="src\assets\CGPA Logo.png"
+            src={Logo}
             alt="Logo"
             className="w-30 h-10 bg-slate-500"
           />
