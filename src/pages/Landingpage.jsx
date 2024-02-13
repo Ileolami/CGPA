@@ -3,7 +3,7 @@ import Button from '../component/Button';
 
 const Landingpage = () => {
   return (
-    <div className='h-screen text-white landing-page py-32 px-10 font-light'>
+    <div className='h-screen text-white  py-32 px-10 font-light   landing-page'>
      <div className='flex justify-center lg:items-center '>
       <main className='flex flex-col mb-20 md:justify-start lg:justify-start lg:flex-row lg:mb-40'>
       <section className='mb-5 lg:px-40 leading-10'>
