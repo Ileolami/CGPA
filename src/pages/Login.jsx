@@ -83,11 +83,12 @@ const Login = () => {
         })
         .catch(err => {
             console.log(err);
-            toast.error("Invalid", {
+            toast.error(err.response.data, {
                 icon: "🔔",
                 style: {
                   border: "none",
                   padding: "",
+                  fontSize: '5px',
                     color: "red",
                   letterSpacing: "1px",
                 },
