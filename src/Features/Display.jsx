@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import DeleteButton from "../Features/DeleteButton";
+import DeleteButton from "./DeleteButton";
 import CgpaContext from "../contexts/CgpaContext";
-import EditButton from "../Features/EditButton";
-import SaveButton from "../Features/SaveButton";
+import EditButton from "./EditButton";
+import SaveButton from "./SaveButton";
 
 const Display = () => {
   const {

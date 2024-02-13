@@ -1,6 +1,6 @@
 import Input from '../Features/Input';
 
-import Display from'./Display';
+import Display from'../Features/Display';
 const Calculate = ()=> {
     return (
      <div>
