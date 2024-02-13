@@ -3,7 +3,7 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
-body {
+.bckg{
   position: relative;
   font-family: "Roboto Mono", sans-serif;
   font-size: 20px;
@@ -11,7 +11,7 @@ body {
   font-weight: 500;
 }
 
-body::before {
+.bckg::before {
   content: "";
   position: fixed;
   top: 0;
