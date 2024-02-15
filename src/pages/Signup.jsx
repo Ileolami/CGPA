@@ -17,7 +17,7 @@ const Signup = () => {
                 icon: "🔔",
                 style: {
                     border: "none",
-                    padding: "5px",
+                    padding: "15px",
                     color: "red",
                     fontSize: "5px",
                     
@@ -29,10 +29,10 @@ const Signup = () => {
 
         if (!email) {
             toast.error("Email is required",{
-                icon: "🔔",
+                icon: "😖",
                 style: {
                     border: "none",
-                    padding: "5px",
+                    padding: "15px",
                     color: "red",
                     fontSize: "5px",
                 },
@@ -42,12 +42,12 @@ const Signup = () => {
 
         if (!password || password.length < 5) {
             toast.error("Password must be at least 5 characters long", {
-                icon: "🔔",
+                icon: "😖",
                 style: {
                     border: "none",
                     padding: "5px",
                     color: "red",
-                    fontSize: "5px",
+                    fontSize: "15px",
                 },
             });
             return;
@@ -60,15 +60,32 @@ const Signup = () => {
                 icon: "🔔",
                 style: {
                     border: "none",
-                    padding: "5px",
+                    padding: "15px",
                     color: "green",
-                    fontSize: "5px",
+                    fontSize: "15px",
                     backgroundColor: "#713200",
                 },
             });
             navigate('/login');
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            toast.error(err.message, {
+                icon: "🔔",
+                style: {
+                    border: "none",
+                    padding: "15px",
+                    color: "green",
+                    fontSize: "15px",
+                },
+                transition: {
+                    duration: 0.5,
+                    timingFunction: 'ease',
+                    delay: 0,
+                },
+
+            });
+        });
     }
 
     return (

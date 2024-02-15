@@ -11,6 +11,57 @@ app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI)
 
+// index.js
+
+app.post('/calculate', async (req, res) => {
+  try {
+      const { email, scale } = req.body;
+
+      // Find the student by email
+      const student = await studentModel.findOne({ email });
+
+      if (!student) {
+          return res.status(400).json({ success: false, message: 'Student not found' });
+      }
+
+      let totalCreditHours = 0;
+      let totalGradePoints = 0;
+
+      // Calculate CGPA based on the grading scale
+      if (scale === '4.0') {
+          const gradeMapping4 = {
+              "A": 4,
+              "B": 3,
+              "C": 2,
+              "D": 1,
+              "E": 0,
+              "F": 0,
+          };
+
+          student.submittedValues.forEach(value => {
+              const gradePoint = gradeMapping4[value.grade];
+              totalCreditHours += parseFloat(value.credit);
+              totalGradePoints += gradePoint * parseFloat(value.credit);
+          });
+      } else if (scale === '5.0') {
+          student.submittedValues.forEach(value => {
+              totalCreditHours += parseFloat(value.credit);
+              totalGradePoints += parseFloat(value.gradeCreditProduct);
+          });
+      } else {
+          return res.status(400).json({ success: false, message: 'Invalid grading scale' });
+      }
+
+      // Calculate CGPA
+      const calculatedCgpa = totalCreditHours !== 0 ? totalGradePoints / totalCreditHours : 0;
+
+      res.json({ success: true, message: 'CGPA calculated successfully', cgpa: calculatedCgpa });
+  } catch (error) {
+      console.error('Error calculating CGPA:', error);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 app.post('/login', [
     check('email', 'Email is required').notEmpty().isEmail(),
     check('password', 'Password is required').notEmpty().isLength({ min: 5 })
@@ -52,6 +103,7 @@ app.post('/signup', [
     .then(student => res.json(student))
     .catch(err => res.json(err))
 });
+
 app.listen(3001, () => {
     console.log('server is running')
 });

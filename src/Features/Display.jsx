@@ -4,6 +4,7 @@ import CgpaContext from "../contexts/CgpaContext";
 import EditButton from "./EditButton";
 import SaveButton from "./SaveButton";
 
+
 const Display = () => {
   const {
     submittedValues,
@@ -38,10 +39,11 @@ const Display = () => {
     F: 0,
   };
 
+
   return (
     <div className="flex item-center justify-center">
       {submittedValues && (
-        <>
+        <div className=" overflow-x-auto block">
           <table
             style={{
               width: "50%",
@@ -157,7 +159,7 @@ const Display = () => {
               </tr>
             </tbody>
           </table>
-        </>
+        </div>
       )}
     </div>
   );

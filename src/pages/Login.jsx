@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
@@ -20,7 +20,7 @@ const Login = () => {
                 style: {
                     border: "none",
                     padding: "",
-                    fontSize: "5px",
+                    fontSize: "15px",
                     color: "red",
                     letterSpacing: "1px",
                 },
@@ -34,7 +34,7 @@ const Login = () => {
                 style: {
                     border: "none",
                     padding: "",
-                    fontSize: "5px",
+                    fontSize: "15px",
                     color: "red",
                     letterSpacing: "1px",
                 },
@@ -62,7 +62,7 @@ const Login = () => {
                 style: {
                     border: "none",
                     padding: "",
-                    fontSize: "5px",
+                    fontSize: "15px",
                     color: "red",
                     letterSpacing: "1px",
                 },
@@ -78,11 +78,11 @@ const Login = () => {
             console.log(result);
             if (result.data === 'Success'){
                 toast.success("welcome", {
-                    icon: "🔔",
+                    icon: "✔",
                     style: {
                       border: "none",
                       padding: "",
-                      fontSize: "5px",
+                      fontSize: "15px",
                       color: "green",
                       letterSpacing: "1px",
                     },
@@ -98,11 +98,16 @@ const Login = () => {
                 icon: "🔔",
                 style: {
                     border: "none",
-                    padding: "5px",
+                    padding: "15px",
                     color: "green",
-                    fontSize: "10px",
-                    backgroundColor: "#713200",
+                    fontSize: "15px",
                 },
+                transition: {
+                    duration: 0.5,
+                    timingFunction: 'ease',
+                    delay: 0,
+                },
+
             });
         });
     }
