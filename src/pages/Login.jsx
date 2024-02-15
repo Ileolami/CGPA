@@ -6,9 +6,13 @@ import { toast } from 'react-hot-toast';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
+        setIsLoading(true)
+
         e.preventDefault();
         if (!email && !password) {
             toast.error("All fields are required", {
@@ -21,6 +25,7 @@ const Login = () => {
                     letterSpacing: "1px",
                 },
             });
+            setIsLoading(false)
             return;
         }
         if (!email) {
@@ -34,6 +39,7 @@ const Login = () => {
                     letterSpacing: "1px",
                 },
             });
+            setIsLoading(false)
             return;
         }
         if(!password){
@@ -47,6 +53,7 @@ const Login = () => {
                     letterSpacing: "1px",
                 },
             });
+            setIsLoading(false)
             return;
         }
         if (!password || password.length < 5) {
@@ -61,9 +68,11 @@ const Login = () => {
                 },
             
             });
+            setIsLoading(false)
             return;
         }
 
+        // console.log("---here")  
         axios.post('http://localhost:3001/login', {email, password})
         .then(result => {
             console.log(result);
@@ -80,19 +89,21 @@ const Login = () => {
                   });
                 navigate('/calculate');
             } 
+            setIsLoading(false)
         })
         .catch(err => {
+            setIsLoading(false)
             console.log(err);
-            // toast.error(err.response.data, {
-            //     icon: "🔔",
-            //     style: {
-            //       border: "none",
-            //       padding: "",
-            //       fontSize: '5px',
-            //         color: "red",
-            //       letterSpacing: "1px",
-            //     },
-            // });
+            toast.error(err.message, {
+                icon: "🔔",
+                style: {
+                    border: "none",
+                    padding: "5px",
+                    color: "green",
+                    fontSize: "10px",
+                    backgroundColor: "#713200",
+                },
+            });
         });
     }
 
@@ -131,8 +142,8 @@ const Login = () => {
                 </div>
                 <div className='flex justify-center'>
                     <button type="submit" 
-                    className='bg-blue-500 text-white px-4 py-2 rounded mt-6 animate-bounce'>
-                        Login
+                    className='bg-blue-500 text-white min-w-32 px-4 py-2 rounded mt-6 animate-bounce'>
+                        {isLoading ? <span className='text-xl font-bold'>...</span>: "Login"}
                     </button>
                 </div>
             </form>
