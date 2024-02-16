@@ -6,6 +6,7 @@ import SaveButton from "./SaveButton";
 
 
 const Display = () => {
+
   const {
     submittedValues,
     scale,
@@ -22,6 +23,7 @@ const Display = () => {
       prevValues.filter((item, i) => i !== index)
     );
   };
+
   const gradeMapping5 = {
     A: 5,
     B: 4,
@@ -153,8 +155,28 @@ const Display = () => {
                     fontWeight: "bolder",
                   }}
                 >
-                  {calculatedCgpa &&
-                    `Your CGPA is: ${calculatedCgpa.toFixed(2)}`}
+          {calculatedCgpa && (
+              <div
+                style={{
+                  padding: "5px",
+                  textAlign: "center",
+                  fontStyle: "italic",
+                  fontWeight: "500", 
+                  color:"red",
+                  animation: "dance 1s infinite",
+                }}
+              >
+                {` 🔔 CGPA is: ${calculatedCgpa.toFixed(2)}`}
+              </div>
+            )}
+
+            <style jsx>{`
+              @keyframes dance {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(30px); }
+                100% { transform: translateX(0); }
+              }
+            `}</style>
                 </td>
               </tr>
             </tbody>

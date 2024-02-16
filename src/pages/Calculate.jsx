@@ -20,6 +20,7 @@ const Calculate = () => {
             console.log('Calculated CGPA:', response.data.cgpa);
             // You can update the context or handle the CGPA data as needed
         } catch (err) {
+            console.error(err);
             toast.error(err.message, {
                 icon: "🔔",
                 style: {

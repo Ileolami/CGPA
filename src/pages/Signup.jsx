@@ -8,50 +8,48 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
+    
+    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (!name) {
-            toast.error("Name is required", {
-                icon: "🔔",
-                style: {
+        
+        // Validate input fields
+        const validateInput = (inputs, message) => {
+            for (let input of inputs) {
+              if (!input) {
+                toast.error(message, {
+                  icon: "🔔",
+                  style: {
                     border: "none",
                     padding: "15px",
-                    color: "red",
-                    fontSize: "5px",
-                    
-                },
-            
-            });
-            return;
-        }
-
-        if (!email) {
-            toast.error("Email is required",{
-                icon: "😖",
-                style: {
-                    border: "none",
-                    padding: "15px",
-                    color: "red",
-                    fontSize: "5px",
-                },
-            });
-            return;
-        }
-
-        if (!password || password.length < 5) {
-            toast.error("Password must be at least 5 characters long", {
-                icon: "😖",
-                style: {
-                    border: "none",
-                    padding: "5px",
                     color: "red",
                     fontSize: "15px",
-                },
+                  },
+                });
+                return false;
+              }
+            }
+            return true;
+          };
+          
+          // Check if all fields are filled
+          if (!validateInput([name, email, password], 'All fields are required')) return;
+
+          // Check password length
+          if (password.length < 5) {
+            toast.error("Password must be at least 5 characters long", {
+              icon: "🔔",
+              style: {
+                border: "none",
+                padding: "15px",
+                color: "red",
+                fontSize: "10px",
+              },
             });
             return;
-        }
+          }
+
+            // Make a POST request to the server to create a new account
 
         axios.post('http://localhost:3001/Signup', {name, email, password})
         .then(result => {
@@ -63,11 +61,12 @@ const Signup = () => {
                     padding: "15px",
                     color: "green",
                     fontSize: "15px",
-                    backgroundColor: "#713200",
                 },
             });
             navigate('/login');
         })
+
+        // Handle errors
         .catch(err => {
             console.log(err);
             toast.error(err.message, {

@@ -17,8 +17,12 @@ app.post('/calculate', async (req, res) => {
   try {
       const { email, scale } = req.body;
 
+      console.log(email)
+
       // Find the student by email
       const student = await studentModel.findOne({ email });
+
+     
 
       if (!student) {
           return res.status(400).json({ success: false, message: 'Student not found' });
