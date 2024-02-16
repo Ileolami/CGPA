@@ -29,12 +29,6 @@ const Calculate = () => {
                     color: "green",
                     fontSize: "15px",
                 },
-                transition: {
-                    duration: 0.5,
-                    timingFunction: 'ease',
-                    delay: 0,
-                },
-
             });
         }
     };
