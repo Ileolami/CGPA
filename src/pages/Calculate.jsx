@@ -10,12 +10,12 @@ import { toast } from 'react-hot-toast';
 
 const Calculate = () => {
     const { submittedValues, scale } = useContext(CgpaContext);
-
+    // console.log(localStorage.getItem('CGPASecret'));
     // Function to save user data and calculate CGPA
     const saveUserDataAndCalculateCgpa = async () => {
         try {
             // Make a POST request to the server to save user data and calculate CGPA
-            const response = await axios.post('http://localhost:3001/calculate', { submittedValues, scale });
+            const response = await axios.post('http://localhost:3001/calculate', { submittedValues, scale }, { headers: { Authorization: `Bearer ${localStorage.getItem('CGPASecret')}` } });
             console.log('User data saved successfully');
             console.log('Calculated CGPA:', response.data.cgpa);
             // You can update the context or handle the CGPA data as needed

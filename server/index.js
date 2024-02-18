@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -6,19 +7,22 @@ const studentModel = require('./Models/Students');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const authenticateUser = require('./middleware/authmiddleware');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI).then((res) => {
+    console.log("db connected")
+})
 
 // index.js
 
-app.post('/calculate', async (req, res) => {
+app.post('/calculate', authenticateUser, async (req, res) => {
   try {
       const { email, scale } = req.body;
-
+      console.log(req.user);
       console.log(email)
 
       // Find the student by email
@@ -76,25 +80,33 @@ app.post('/login', [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-// Compare passwords
-const {email, password} = req.body;
-const user = await studentModel.findOne({email});
-const isMatch = await bcrypt.compare(password, user.password);
-if (!isMatch) {
-  return res.status(400).json({ message: 'Invalid credentials' });
-}
+    // Compare passwords
+    const {email, password} = req.body;
+    const user = await studentModel.findOne({email});
+    const isMatch = await bcrypt.compare(password, user.password);
 
-// Generate JWT token
-const payload = {
-  user: {
-    id: user.id
-  }
-};
+    if (!isMatch) {
+    return res.status(400).json({ message: 'Invalid credentials' });  
+    }
 
-jwt.sign(payload, 'jwtSecret', { expiresIn: '1h' }, (err, token) => {
-  if (err) throw err;
-  return res.json({ token });
-});
+    console.log({user})
+
+    // Generate JWT token
+    const payload = {
+        user: {
+            id: user._id
+        }
+    };
+console.log(payload);
+
+const token = jwt.sign(payload, `${process.env.JWT_TOKEN}`, {
+          expiresIn: '1hr',
+        })
+
+    console.log({token})
+
+    res.json({token})
+
 });
 
 app.post('/signup', [

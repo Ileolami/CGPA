@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -76,7 +79,7 @@ const Login = () => {
         axios.post('http://localhost:3001/login', {email, password})
         .then(result => {
             console.log(result);
-            if (result.data === 'Success'){
+            if (result.data.token){
                 toast.success("welcome", {
                     icon: "✔",
                     style: {
@@ -87,6 +90,7 @@ const Login = () => {
                       letterSpacing: "1px",
                     },
                   });
+                  localStorage.setItem('CGPASecret', result.data.token);
                 navigate('/calculate');
             } 
             setIsLoading(false)
@@ -94,7 +98,7 @@ const Login = () => {
         .catch(err => {
             setIsLoading(false)
             console.log(err);
-            toast.error(err.message, {
+            toast.error("Invalid Email or Password", {
                 icon: "🔔",
                 style: {
                     border: "none",
@@ -136,14 +140,22 @@ const Login = () => {
                     className='block text-gray-300'>
                         Password
                     </label> 
-                    <input type="password" 
-                    placeholder='Enter your password'
-                    autoComplete='off'
-                    id="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className='w-80 p-2 border border-gray-300 rounded mt-1 text-sm' 
-                    />
+                  
+                    <div 
+                      onClick={() => setShowPassword(!showPassword)}
+                      className=' flex gap-20 items-center bg-white rounded border-gray-300 w-80 mt-1'
+                       >
+                     <input 
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder='Enter your password'
+                      autoComplete='off'
+                      id="password" 
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className='p-2 text-sm bg-none rounded' 
+                     />
+                        {showPassword ? <FiEyeOff/> : <FiEye />}
+                    </div>
                 </div>
                 <div className='flex justify-center'>
                     <button type="submit" 

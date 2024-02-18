@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     
     // Handle form submission
     const handleSubmit = (e) => {
@@ -112,12 +114,21 @@ const Signup = () => {
                     </div>
                     <div>
                         <label htmlFor="password" className='block text-gray-300'>Password</label> 
-                        <input type="password" 
-                        placeholder='Enter your password' 
-                        autoComplete='off' id="password" 
-                        value={password} 
-                        className='w-80 p-2 border border-gray-300 rounded mt-1 text-sm' 
-                        onChange={(e) => setPassword(e.target.value)} />
+                        <div 
+                      onClick={() => setShowPassword(!showPassword)}
+                      className=' flex gap-20 items-center bg-white rounded border-gray-300 w-80 mt-1'
+                       >
+                     <input 
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder='Enter your password'
+                      autoComplete='off'
+                      id="password" 
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className='p-2 text-sm bg-none rounded' 
+                     />
+                        {showPassword ? <FiEyeOff/> : <FiEye />}
+                    </div>
                     </div>
                     <div className='flex justify-center'>
                         <button type="submit" 

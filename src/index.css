@@ -42,5 +42,8 @@ tr:nth-child(odd) {
   background-color: white;
 }
 .landing-page{
-  background: url('/src/assets/Rectangle 4.png') center no-repeat;
+  background-image: url('/src/assets/Rectangle 4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
