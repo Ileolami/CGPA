@@ -15,6 +15,12 @@ const Display = () => {
     editingIndex,
     setEditingIndex,
   } = useContext(CgpaContext);
+
+  const { studentData, setStudentData } = useContext(AuthContext);
+  
+
+
+
   const handleEdit = (index) => {
     setEditingIndex(index);
   };

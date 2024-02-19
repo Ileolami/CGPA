@@ -12,16 +12,7 @@ const Calculate = () => {
     const { submittedValues, scale } = useContext(CgpaContext);
     const [studentData, student] = useState({})
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await axios.get('http://localhost:3001/student)
-            
-          }
-          fetchData();
-    }, [])
-
-  
-
+ 
     const saveUserDataAndCalculateCgpa = async () => {
         try {
             // Make a POST request to the server to save user data and calculate CGPA

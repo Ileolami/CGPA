@@ -20,20 +20,47 @@ app.use(cors());
 // });
 
 // index.js
-app.get('/students/:id', async(req, res) => {
-  const id = req.params.id;
+// app.get('/loginstudent', async(req, res) => {
+//   const id = req.params.id;
 
-  const student = await studentModel.findById({_id: id});
+//   const student = await studentModel.findById({_id: id});
 
   
-  if (!student) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Student not found" });
+//   if (!student) {
+//     return res
+//       .status(400)
+//       .json({ success: false, message: "Student not found" });
+//   }
+
+//   res.json({student});
+// })
+
+
+
+app.get('/loginstudent', async(req, res) => {
+  // Retrieve token from request header
+  const token = req.header('x-auth-token');
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token, authorization denied' });
   }
 
-  res.json({student});
-})
+  try {
+    // Verify and decode the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const student = await studentModel.findById(decoded.user.id);
+
+    if (!student) {
+      return res.status(400).json({ success: false, message: "Student not found" });
+    }
+    console.log(student);
+    res.json({student});
+  } catch (err) {
+    res.status(400).json({ message: 'Token is not valid' });
+  }
+});
+
 app.post("/calculate", authenticateUser, async (req, res) => {
   try {
     const {submittedValues, scale } = req.body;
