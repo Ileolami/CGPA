@@ -12,6 +12,7 @@ export const CgpaProvider = ({ children }) => {
   const [calculatedCgpa, setCalculatedCgpa] = useState(null);
   const [scale, setScale] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
+  
   return (
     <CgpaContext.Provider value={{ formValues, setFormValues, submittedValues, setSubmittedValues, calculatedCgpa, setCalculatedCgpa, scale, setScale,editingIndex, setEditingIndex  }}>
       {children}
