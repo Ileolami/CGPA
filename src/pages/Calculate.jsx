@@ -10,9 +10,7 @@ import { toast } from 'react-hot-toast';
 
 const Calculate = () => {
     const { submittedValues, scale } = useContext(CgpaContext);
-    const [studentData, student] = useState({})
-
- 
+  
     const saveUserDataAndCalculateCgpa = async () => {
         try {
             // Make a POST request to the server to save user data and calculate CGPA

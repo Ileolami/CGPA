@@ -6,24 +6,29 @@ export const AuthContextProvider = (props) => {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    const fetchStudent = async () => {
-      const token = localStorage.setItem('CGPASecret', data.token); // Assuming the token is stored in local storage
-      console.log(token);
-      const response = await fetch('/loginstudent', {
-        headers: {
-          'x-auth-token': token
+    const fetchStudentData = async () => {
+      try {
+        const token = localStorage.getItem('CGPASecret');
+        // Make a GET request to your /loginstudent endpoint
+        const response = await fetch('http://localhost:3001/loginstudent', {
+          headers: {
+            'authorization': token
+          }
+        });
+        console.log(response);
+        if (!response.ok) {
+          throw new Error('Failed to fetch student data');
         }
-      });
-      const data = await response.json();
 
-      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
         setStudent(data.student);
-      } else {
-        console.error(data.message);
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    fetchStudent();
+    fetchStudentData();
   }, []);
 
   return (

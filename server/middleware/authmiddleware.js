@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const authenticateUser = async (req, res, next) => {
   // Get token from headers, query parameters, or cookies
-  const token = req.header("Authorization")?.replace("Bearer ", "");
+  const token = req.headers("Authorization")?.replace("Bearer ", "");
 
   // console.log({ token });
 
