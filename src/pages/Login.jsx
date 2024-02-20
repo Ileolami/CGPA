@@ -94,7 +94,7 @@ const Login = () => {
                     },
                   });
                   localStorage.setItem('CGPASecret', result.data.token);
-                navigate('/calculate');
+                window.location.href = '/calculate';
             } 
             setIsLoading(false)
         })

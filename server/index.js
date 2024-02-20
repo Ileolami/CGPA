@@ -37,7 +37,7 @@ app.use(cors());
 
 
 
-app.get('/loginstudent', async(req, res) => {
+app.get('/getstudent', async(req, res) => {
   // Retrieve token from request header
   const token = req.headers['authorization'];
 
