@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
@@ -14,7 +14,7 @@ const Login = () => {
 
     const {student} = useContext(AuthContext);
 
-    const navigate = useNavigate();
+
 
     const handleSubmit = (e) => {
         setIsLoading(true)
