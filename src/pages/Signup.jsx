@@ -119,7 +119,7 @@ const Signup = () => {
                       className=' flex gap-20 items-center bg-white rounded border-gray-300 w-80 mt-1'
                        >
                      <input 
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ?'password'  :'text' }
                       placeholder='Enter your password'
                       autoComplete='off'
                       id="password" 
@@ -127,7 +127,7 @@ const Signup = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       className='p-2 text-sm bg-none rounded' 
                      />
-                        {showPassword ? <FiEyeOff/> : <FiEye />}
+                        {showPassword ? <FiEyeOff/> :<FiEye /> }
                     </div>
                     </div>
                     <div className='flex justify-center'>
