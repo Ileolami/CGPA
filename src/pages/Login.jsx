@@ -83,7 +83,7 @@ const Login = () => {
         .then(result => {
             console.log(result);
             if (result.data.token){
-                toast.success(`Welcome ${student.name}`, {
+                toast.success("welcome Back 🤝", {
                     icon: "✔",
                     style: {
                       border: "none",
