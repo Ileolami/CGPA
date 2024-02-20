@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import AuthContext from "../contexts/authContext";
 
 
 const Login = () => {
@@ -10,6 +11,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+
+    const {student} = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -80,7 +83,7 @@ const Login = () => {
         .then(result => {
             console.log(result);
             if (result.data.token){
-                toast.success("welcome", {
+                toast.success(`Welcome ${student.name}`, {
                     icon: "✔",
                     style: {
                       border: "none",

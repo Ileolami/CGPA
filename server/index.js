@@ -49,13 +49,15 @@ app.get('/loginstudent', async(req, res) => {
     // Verify and decode the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const student = await studentModel.findById(decoded.user.id);
+    const student = await studentModel.findById(decoded.user.id).select('-password').select('-_id');
+
     if (!student) {
       return res.status(400).json({ success: false, message: "Student not found" });
     }
     
     // Return the student data
-    res.json({student});
+    res.status(200).json({ success: true, student, message: "Student found" });
+
   } catch (err) {
     res.status(400).json({ message: 'Token is not valid' });
   }

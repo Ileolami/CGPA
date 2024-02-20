@@ -1,32 +1,51 @@
-import { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import DeleteButton from "./DeleteButton";
-import CgpaContext from "../contexts/CgpaContext";
 import EditButton from "./EditButton";
 import SaveButton from "./SaveButton";
-// import AuthContext from "../contexts/authContext";
+import AuthContext from "../contexts/authContext";
+import { CgpaContext } from "../contexts/CgpaContext";
 
 const Display = () => {
-
+  const { student } = useContext(AuthContext);
   const {
     submittedValues,
     scale,
     setSubmittedValues,
-    calculatedCgpa,
     editingIndex,
     setEditingIndex,
+    calculatedCgpa,
+    setCalculatedCgpa,
   } = useContext(CgpaContext);
 
- 
-
-
-  const handleEdit = (index) => {
-    setEditingIndex(index);
+ useEffect(() => {
+  const calculateCgpa = () => {
+    if (submittedValues) {
+      let totalCredit = 0;
+      let totalGradeCreditProduct = 0;
+      submittedValues.forEach((course) => {
+        if (course.grade && course.credit) {
+          const gradePoint = calculateGradePoint(course.grade, course.credit);
+          if (gradePoint) {
+            totalCredit += parseFloat(course.credit);
+            totalGradeCreditProduct += gradePoint * parseFloat(course.credit);
+          }
+        }
+      });
+      if (totalCredit > 0) {
+        const cgpa = totalGradeCreditProduct / totalCredit;
+        setCalculatedCgpa(cgpa);
+      }
+    }
   };
-  const handleDelete = (index) => {
-    setSubmittedValues((prevValues) =>
-      prevValues.filter((item, i) => i !== index)
-    );
-  };
+
+  calculateCgpa();
+}, [submittedValues, scale, setCalculatedCgpa]);
+
+  useEffect(() => {
+    if (student) {
+      setSubmittedValues(student.courses);
+    }
+  }, [student, setSubmittedValues]);
 
   const gradeMapping5 = {
     A: 5,
@@ -45,11 +64,28 @@ const Display = () => {
     F: 0,
   };
 
+  const calculateGradePoint = (grade) => {
+    const gradeMapping = scale === "4.0" ? gradeMapping4 : gradeMapping5;
+    return gradeMapping[grade];
+  };
+
+  const handleEdit = (index) => {
+    setEditingIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setSubmittedValues((prevValues) =>
+      prevValues.filter((item, i) => i !== index)
+    );
+  };
 
   return (
     <div className="flex item-center justify-center">
       {submittedValues && (
-        <div className=" overflow-x-auto block">
+        <div className="overflow-x-auto block">
+          <h1 className="flex justify-center items-center rounded-lg bg-slate-950 text-green-600 p-5 w-80 mx-32 my-10">
+            {student && student.name}'s Courses
+          </h1>
           <table
             style={{
               width: "50%",
@@ -68,11 +104,8 @@ const Display = () => {
             </thead>
             <tbody>
               {submittedValues.map((value, index) => {
-                const gradeMapping =
-                  scale === "4.0" ? gradeMapping4 : gradeMapping5;
-                const gradePoint = gradeMapping[value.grade];
-                const gradeCreditProduct =
-                  gradePoint * parseFloat(value.credit);
+                const gradePoint = calculateGradePoint(value.grade, value.credit);
+                const gradeCreditProduct = gradePoint * parseFloat(value.credit);
 
                 return (
                   <tr key={index}>
@@ -117,10 +150,10 @@ const Display = () => {
                           onChange={(e) => {
                             const newValues = [...submittedValues];
                             newValues[index].grade = e.target.value;
-                            const gradeMapping =
-                              scale === "4.0" ? gradeMapping4 : gradeMapping5;
-                            newValues[index].gradePoint =
-                              gradeMapping[newValues[index].grade];
+                            newValues[index].gradePoint = calculateGradePoint(
+                              e.target.value,
+                              value.credit
+                            );
                             newValues[index].gradeCreditProduct =
                               newValues[index].gradePoint *
                               parseFloat(newValues[index].credit);
@@ -159,28 +192,34 @@ const Display = () => {
                     fontWeight: "bolder",
                   }}
                 >
-          {calculatedCgpa && (
-              <div
-                style={{
-                  padding: "5px",
-                  textAlign: "center",
-                  fontStyle: "italic",
-                  fontWeight: "500", 
-                  color:"red",
-                  animation: "dance 1s infinite",
-                }}
-              >
-                {` 🔔 CGPA is: ${calculatedCgpa.toFixed(2)}`}
-              </div>
-            )}
+                  {calculatedCgpa && (
+                    <div
+                      style={{
+                        padding: "5px",
+                        textAlign: "center",
+                        fontStyle: "italic",
+                        fontWeight: "500",
+                        color: "red",
+                        animation: "dance 1s infinite",
+                      }}
+                    >
+                      {` 🔔 CGPA is: ${calculatedCgpa.toFixed(2)}`}
+                    </div>
+                  )}
 
-            <style jsx>{`
-              @keyframes dance {
-                0% { transform: translateX(0); }
-                50% { transform: translateX(30px); }
-                100% { transform: translateX(0); }
-              }
-            `}</style>
+                  <style jsx>{`
+                    @keyframes dance {
+                      0% {
+                        transform: translateX(0);
+                      }
+                      50% {
+                        transform: translateX(30px);
+                      }
+                      100% {
+                        transform: translateX(0);
+                      }
+                    }
+                  `}</style>
                 </td>
               </tr>
             </tbody>
@@ -190,4 +229,6 @@ const Display = () => {
     </div>
   );
 };
+
 export default Display;
+
