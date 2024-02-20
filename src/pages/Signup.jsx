@@ -53,7 +53,7 @@ const Signup = () => {
 
             // Make a POST request to the server to create a new account
 
-        axios.post('http://localhost:3001/Signup', {name, email, password})
+        axios.post('https://cgpa-jmok.onrender.com/Signup', {name, email, password})
         .then(result => {
             console.log(result);
             toast.success("Account created successfully", {

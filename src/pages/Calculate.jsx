@@ -14,7 +14,7 @@ const Calculate = () => {
     const saveUserDataAndCalculateCgpa = async () => {
         try {
             // Make a POST request to the server to save user data and calculate CGPA
-            const response = await axios.post('http://localhost:3001/calculate', { submittedValues, scale }, { headers: { Authorization: `Bearer ${localStorage.getItem('CGPASecret')}` } });
+            const response = await axios.post('https://cgpa-jmok.onrender.com/calculate', { submittedValues, scale }, { headers: { Authorization: `Bearer ${localStorage.getItem('CGPASecret')}` } });
             toast.success("Saved successfully", {
                 icon: "🔔",
                 style: {

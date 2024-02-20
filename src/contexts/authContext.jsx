@@ -10,7 +10,7 @@ export const AuthContextProvider = (props) => {
       try {
         const token = localStorage.getItem('CGPASecret');
         // Make a GET request to your /loginstudent endpoint
-        const response = await fetch('http://localhost:3001/getstudent', {
+        const response = await fetch('https://cgpa-jmok.onrender.com/getstudent', {
           headers: {
             'authorization': token
           }

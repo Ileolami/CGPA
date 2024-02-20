@@ -79,7 +79,7 @@ const Login = () => {
         }
 
         // console.log("---here")  
-        axios.post('http://localhost:3001/login', {email, password})
+        axios.post('https://cgpa-jmok.onrender.com/login', {email, password})
         .then(result => {
             console.log(result);
             if (result.data.token){
