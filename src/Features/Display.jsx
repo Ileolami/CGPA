@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import SaveButton from "./SaveButton";
 import AuthContext from "../contexts/authContext";
 import { CgpaContext } from "../contexts/CgpaContext";
+import Confetti from "react-confetti";
+
 
 const Display = () => {
   const { student } = useContext(AuthContext);
@@ -15,7 +17,9 @@ const Display = () => {
     setEditingIndex,
     calculatedCgpa,
     setCalculatedCgpa,
+    resultClass,
   } = useContext(CgpaContext);
+
 
  useEffect(() => {
   const calculateCgpa = () => {
@@ -82,7 +86,8 @@ const Display = () => {
   return (
     <div className="flex item-center justify-center">
       {submittedValues && (
-        <div className="overflow-x-auto block">
+         <>
+        <div className="overflow-x-auto block" >
           <h1 className="flex justify-center items-center rounded-lg bg-slate-950 text-green-600 p-5 w-96 mx-32 my-10">
             {student && student.name}'s Courses
           </h1>
@@ -95,11 +100,11 @@ const Display = () => {
           >
             <thead>
               <tr style={{ backgroundColor: "#ddd" }}>
-                <th style={{ padding: "5px", textAlign: "center" }}>Title</th>
-                <th style={{ padding: "5px", textAlign: "center" }}>Unit</th>
-                <th style={{ padding: "5px", textAlign: "center" }}>Grade</th>
-                <th style={{ padding: "5px", textAlign: "center" }}>Point</th>
-                <th style={{ padding: "5px", textAlign: "center" }}>GC</th>
+                <th style={{ padding: "20px", textAlign: "center" }}>Title</th>
+                <th style={{ padding: "20px", textAlign: "center" }}>Unit</th>
+                <th style={{ padding: "20px", textAlign: "center" }}>Grade</th>
+                <th style={{ padding: "20px", textAlign: "center" }}>Point</th>
+                <th style={{ padding: "20px", textAlign: "center" }}>GC</th>
               </tr>
             </thead>
             <tbody>
@@ -200,10 +205,11 @@ const Display = () => {
                         fontStyle: "italic",
                         fontWeight: "500",
                         color: "red",
+                        fontSize: "15px",
                         animation: "dance 1s infinite",
                       }}
                     >
-                      {` 🔔 CGPA is: ${calculatedCgpa.toFixed(2)}`}
+                      {` 🔔 CGPA is: ${calculatedCgpa.toFixed(2)} which is ${resultClass}`}
                     </div>
                   )}
 
@@ -225,6 +231,7 @@ const Display = () => {
             </tbody>
           </table>
         </div>
+        </>
       )}
     </div>
   );

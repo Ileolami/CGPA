@@ -1,4 +1,3 @@
-// Calculate.jsx
 
 import { useContext, useEffect, useState } from 'react';
 import Input from '../Features/Input';
@@ -9,7 +8,7 @@ import Button from '../component/Button';
 import { toast } from 'react-hot-toast';
 
 const Calculate = () => {
-    const { submittedValues, scale } = useContext(CgpaContext);
+    const { submittedValues, scale, calculatedCgpa, resultClass  } = useContext(CgpaContext);
     
     const saveUserDataAndCalculateCgpa = async () => {
         try {
@@ -39,18 +38,35 @@ const Calculate = () => {
             });
         }
     };
+ 
+    const speakResult = () => {
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(`Your CGPA is ${calculatedCgpa.toFixed(2)} which is ${resultClass}`);
+      synth.speak(utterance);
+    };
 
     return (
         <div className='bckg'>
             <Input />
             <Display student/>
-            <div className='flex justify-center items-center m-6'>
+            <div className='flex justify-center items-center m-6 gap-7'>
             <Button 
             onClick={saveUserDataAndCalculateCgpa}
             props="Save"
             className="bg-green-500 bg-opacity-10 hover:bg-black text-white font-bold py-2 px-4 rounded-lg"
             />
+            <Button
+            props={'Listen'}
+            className="bg-green-500 bg-opacity-10 hover:bg-black text-white font-bold py-2 px-4 rounded-lg"
+            onClick={speakResult}
+            />
+            <Button
+            props={'Print'}
+            className="bg-green-500 bg-opacity-10 hover:bg-black text-white font-bold py-2 px-4 rounded-lg"
+            onClick={() => window.print()}
+            />
             </div>
+            
         </div>
     );
 };
