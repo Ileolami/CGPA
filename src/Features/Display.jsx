@@ -4,7 +4,7 @@ import EditButton from "./EditButton";
 import SaveButton from "./SaveButton";
 import AuthContext from "../contexts/authContext";
 import { CgpaContext } from "../contexts/CgpaContext";
-import Confetti from "react-confetti";
+
 
 
 const Display = () => {
