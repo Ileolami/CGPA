@@ -39,3 +39,5 @@ Using a CGPA calculator offers several benefits for students:
 ## Conclusion
 
 The CGPA calculator is a valuable tool for students to assess their academic performance and plan their future studies. By using this  calculator, students can make informed decisions and set realistic goals for their educational journey.
+
+[Click here 👉](https://cgpa-nu.vercel.app)
