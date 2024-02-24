@@ -7,6 +7,7 @@ export const AuthContextProvider = (props) => {
 
   useEffect(() => {
     const fetchStudentData = async () => {
+
       try {
         const token = localStorage.getItem('CGPASecret');
         // Make a GET request to your /loginstudent endpoint
@@ -16,6 +17,7 @@ export const AuthContextProvider = (props) => {
           }
         });
         console.log(response);
+        
   
         if (!response.ok) {
           throw new Error('Failed to fetch student data');
