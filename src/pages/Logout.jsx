@@ -5,7 +5,7 @@ function Logout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('CGPASecret'); // replace 'CGPASecret' with the key you used to store the token
+    localStorage.removeItem('CGPASecret'); 
     navigate('/');
   };
 
