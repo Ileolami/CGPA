@@ -101,7 +101,7 @@ const Login = () => {
                   localStorage.setItem('CGPASecret', result.data.token);
                 window.location.href = '/calculate';
             } 
-            setIsLoading(false)
+            setIsLoading(true)
         })
         .catch(err => {
             setIsLoading(false)
