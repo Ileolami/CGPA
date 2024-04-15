@@ -87,7 +87,7 @@ const Display = () => {
     <>
       <div>
           <h1 className="flex justify-center items-center rounded-lg bg-slate-950 text-green-600 p-5 w-80 mx-5 my-5 text-lg md:mx-64 lg:mx-96">
-            {student && student.name}'s Courses
+            {student && student.name}&apos;s Courses
           </h1>
 
       </div>
