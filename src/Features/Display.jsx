@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect} from "react";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import SaveButton from "./SaveButton";
@@ -84,13 +84,17 @@ const Display = () => {
   };
 
   return (
+    <>
+      <div>
+          <h1 className="flex justify-center items-center rounded-lg bg-slate-950 text-green-600 p-5 w-80 mx-5 my-5 text-lg md:mx-64 lg:mx-96">
+            {student && student.name}'s Courses
+          </h1>
+
+      </div>
     <div className="flex item-center justify-center">
       {submittedValues && (
          <>
         <div className="overflow-x-auto block" >
-          <h1 className="flex justify-center items-center rounded-lg bg-slate-950 text-green-600 p-5 w-96 mx-32 my-10">
-            {student && student.name}'s Courses
-          </h1>
           <table
             style={{
               width: "50%",
@@ -234,6 +238,7 @@ const Display = () => {
         </>
       )}
     </div>
+    </>
   );
 };
 
