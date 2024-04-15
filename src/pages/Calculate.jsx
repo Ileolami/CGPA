@@ -1,19 +1,30 @@
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../Features/Input';
 import Display from '../Features/Display';
 import axios from 'axios';
 import CgpaContext from '../contexts/CgpaContext';
 import Button from '../component/Button';
 import { toast } from 'react-hot-toast';
+import Logout from './Logout';
 
 const Calculate = () => {
     const { submittedValues, scale, calculatedCgpa, resultClass  } = useContext(CgpaContext);
-    
+    const navigate = useNavigate();
+    const token = localStorage.getItem('CGPASecret'); 
+  
+    useEffect(() => {
+      if (!token) {
+        navigate('/login');
+      }
+    }, [token, navigate]);
+
     const saveUserDataAndCalculateCgpa = async () => {
         try {
             // Make a POST request to the server to save user data and calculate CGPA
-            const response = await axios.post('https://cgpa-jmok.onrender.com/calculate', { submittedValues, scale }, { headers: { Authorization: `Bearer ${localStorage.getItem('CGPASecret')}` } });
+            const response = await axios.post('https://cgpa-jmok.onrender.com/calculate', { submittedValues, scale }, 
+            { headers: { Authorization: `Bearer ${localStorage.getItem('CGPASecret')}` } });
             toast.success("Saved successfully", {
                 icon: "🔔",
                 style: {
@@ -38,6 +49,7 @@ const Calculate = () => {
             });
         }
     };
+
  
     const speakResult = () => {
       const synth = window.speechSynthesis;
@@ -65,6 +77,7 @@ const Calculate = () => {
             className="bg-green-500 bg-opacity-10 hover:bg-black text-white font-bold py-2 px-4 rounded-lg"
             onClick={() => window.print()}
             />
+            <Logout />
             </div>
             
         </div>

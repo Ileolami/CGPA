@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import AuthContext from "../contexts/authContext";
 
 
 const Login = () => {
@@ -12,9 +12,14 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const {student} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const token = localStorage.getItem('CGPASecret'); 
 
-
+      useEffect(() => {
+       if (token) {
+        navigate('/calculate');
+        }
+      }, [token, navigate]);
 
     const handleSubmit = (e) => {
         setIsLoading(true)
@@ -167,6 +172,9 @@ const Login = () => {
                     </button>
                 </div>
             </form>
+            <div className='text-center mt-4'>
+                    <Link to='/signup' className=' text-red-700 text-xs leading-[1] hover:text-white'>Don&apos;t have an account?</Link>
+                </div>
            </div>
         </div>
     )

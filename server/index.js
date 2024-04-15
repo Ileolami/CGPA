@@ -15,27 +15,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// mongoose.connect(process.env.MONGODB_URI).then((res) => {
-//   console.log("db connected");
-// });
-
-// index.js
-// app.get('/loginstudent', async(req, res) => {
-//   const id = req.params.id;
-
-//   const student = await studentModel.findById({_id: id});
-
-  
-//   if (!student) {
-//     return res
-//       .status(400)
-//       .json({ success: false, message: "Student not found" });
-//   }
-
-//   res.json({student});
-// })
-
-
 
 app.get('/getstudent', async(req, res) => {
   // Retrieve token from request header
@@ -165,9 +144,6 @@ app.post(
     const token = jwt.sign(payload, `${process.env.JWT_SECRET}`, {
       expiresIn: "1hr",
     });
-
-    
-   
     console.log({ token });
     res.json({ token});
   }

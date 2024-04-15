@@ -17,12 +17,11 @@ export const AuthContextProvider = (props) => {
           }
         });
         console.log(response);
-        
-  
+
         if (!response.ok) {
           throw new Error('Failed to fetch student data');
         }
-  
+
         const data = await response.json();
         console.log(data);
         setStudent(data.student);
